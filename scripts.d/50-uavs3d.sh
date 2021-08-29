@@ -1,7 +1,7 @@
 #!/bin/bash
 
 UAVS3D_REPO="https://github.com/uavs3/uavs3d.git"
-UAVS3D_COMMIT="26b088ed51a8c3f7ed73e2a70321777c8aff5a8a"
+UAVS3D_COMMIT="57d20183301d4197d1c938f62f8a5911e33465d7"
 
 ffbuild_enabled() {
     [[ $TARGET == win32 ]] && return -1

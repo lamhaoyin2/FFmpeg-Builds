@@ -1,15 +1,11 @@
 #!/bin/bash
 
 MINGW_REPO="https://github.com/mirror/mingw-w64.git"
-MINGW_COMMIT="f95546461fa7edfb2856c92f2c48f958ff0a9de4"
+MINGW_COMMIT="6b62cf66832bd158c67662cd5566413baf35f20e"
 
 ffbuild_enabled() {
     [[ $TARGET == win* ]] || return -1
     return 0
-}
-
-ffbuild_dockerstage() {
-    to_df "RUN --mount=src=${SELF},dst=/stage.sh --mount=src=patches/mingw,dst=/patches run_stage /stage.sh"
 }
 
 ffbuild_dockerlayer() {
@@ -24,11 +20,6 @@ ffbuild_dockerfinal() {
 ffbuild_dockerbuild() {
     git-mini-clone "$MINGW_REPO" "$MINGW_COMMIT" mingw
     cd mingw
-
-    for patch in /patches/*.patch; do
-        echo "Applying $patch"
-        git am < "$patch"
-    done
 
     cd mingw-w64-headers
 
